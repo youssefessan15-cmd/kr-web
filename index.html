@@ -4,69 +4,322 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KR Web</title>
+  <title>KR Web - Community</title>
+
   <style>
-    * { box-sizing: border-box; }
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
       font-family: Arial, sans-serif;
-      background: #0b1020;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #080d19;
       color: white;
-    }
-    header {
-      padding: 22px;
-      background: #111a30;
-      border-bottom: 1px solid #263653;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-    }
-    header h1 { margin: 0; color: #55c7ff; }
-    main {
-      max-width: 900px;
-      margin: 55px auto;
+      justify-content: center;
       padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 430px;
+      background: #111a2c;
+      border: 1px solid #263653;
+      border-radius: 18px;
+      padding: 35px;
+      box-shadow: 0 15px 50px #0008;
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 35px;
+      font-weight: bold;
+      color: #42a5ff;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #9aabc4;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 15px;
+      border: 1px solid #344664;
+      border-radius: 9px;
+      background: #0b1323;
+      color: white;
+      outline: none;
+      font-size: 15px;
+    }
+
+    input:focus {
+      border-color: #2999ff;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 9px;
+      background: #1689ed;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background: #0873d0;
+    }
+
+    .switch {
+      text-align: center;
+      color: #a9b8ce;
+      margin-top: 22px;
+      font-size: 14px;
+    }
+
+    .switch span {
+      color: #42a5ff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #message {
+      text-align: center;
+      margin-top: 15px;
+      color: #ff8d8d;
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    #welcome {
+      display: none;
       text-align: center;
     }
-    .panel {
-      background: #141f38;
-      border: 1px solid #293b5d;
-      border-radius: 16px;
-      padding: 35px 20px;
+
+    #welcome h2 {
+      color: #42a5ff;
     }
-    button {
-      background: #168bd0;
-      color: white;
-      border: 0;
-      padding: 12px 25px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
+
+    #userEmail {
+      color: #b6c6dc;
+      margin: 20px 0;
+      overflow-wrap: anywhere;
     }
-    button:hover { background: #0873b5; }
+
+    .logout {
+      background: #e14b59;
+    }
+
     footer {
       text-align: center;
-      color: #8998b5;
-      padding: 25px;
+      color: #65758d;
+      margin-top: 30px;
+      font-size: 12px;
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>KR Web</h1>
-    <span>Welcome</span>
-  </header>
 
-  <main>
-    <div class="panel">
-      <h2>Welcome to KR Web</h2>
-      <p>Your community. Your conversations. Your space.</p>
-      <button onclick="alert('KR Web is starting!')">
-        Get Started
-      </button>
+  <div class="container">
+
+    <div class="logo">KR WEB</div>
+    <p class="subtitle">Your community. Your conversations. Your space.</p>
+
+    <div id="auth">
+
+      <div id="loginForm">
+        <h2>Welcome Back</h2>
+
+        <input id="loginEmail" type="email"
+          placeholder="Email Address" autocomplete="email">
+
+        <input id="loginPassword" type="password"
+          placeholder="Password" autocomplete="current-password">
+
+        <button id="loginBtn">Login</button>
+
+        <p class="switch">
+          Don't have an account?
+          <span id="showSignup">Sign Up</span>
+        </p>
+      </div>
+
+      <div id="signupForm" style="display:none">
+        <h2>Create Account</h2>
+
+        <input id="signupName" type="text"
+          placeholder="Display Name" autocomplete="name">
+
+        <input id="signupEmail" type="email"
+          placeholder="Email Address" autocomplete="email">
+
+        <input id="signupPassword" type="password"
+          placeholder="Password (at least 6 characters)"
+          autocomplete="new-password">
+
+        <button id="signupBtn">Create Account</button>
+
+        <p class="switch">
+          Already have an account?
+          <span id="showLogin">Login</span>
+        </p>
+      </div>
+
+      <p id="message" role="status"></p>
+
     </div>
-  </main>
 
-  <footer>© 2026 KR Web. All rights reserved.</footer>
+    <div id="welcome">
+      <h2>Welcome to KR Web!</h2>
+      <p>You are successfully logged in.</p>
+      <p id="userEmail"></p>
+      <button id="logoutBtn" class="logout">Logout</button>
+    </div>
+
+    <footer>© 2026 KR Web. All rights reserved.</footer>
+
+  </div>
+
+  <script type="module">
+    import { initializeApp } from
+      "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      signOut,
+      onAuthStateChanged,
+      updateProfile
+    } from
+      "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+    // Replace these values with your Firebase project config
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const $ = (id) => document.getElementById(id);
+
+    function showMessage(message, success = false) {
+      $("message").textContent = message;
+      $("message").style.color =
+        success ? "#55d99b" : "#ff8d8d";
+    }
+
+    $("showSignup").onclick = () => {
+      $("loginForm").style.display = "none";
+      $("signupForm").style.display = "block";
+      showMessage("");
+    };
+
+    $("showLogin").onclick = () => {
+      $("signupForm").style.display = "none";
+      $("loginForm").style.display = "block";
+      showMessage("");
+    };
+
+    $("signupBtn").onclick = async () => {
+      const name = $("signupName").value.trim();
+      const email = $("signupEmail").value.trim();
+      const password = $("signupPassword").value;
+
+      if (!name || !email || !password) {
+        return showMessage("Please fill in all fields.");
+      }
+
+      if (password.length < 6) {
+        return showMessage("Password must be at least 6 characters.");
+      }
+
+      $("signupBtn").disabled = true;
+      showMessage("Creating your account...", true);
+
+      try {
+        const result = await createUserWithEmailAndPassword(
+          auth, email, password
+        );
+
+        await updateProfile(result.user, {
+          displayName: name
+        });
+
+        showMessage("Account created successfully!", true);
+
+      } catch (error) {
+        showMessage(error.message);
+      } finally {
+        $("signupBtn").disabled = false;
+      }
+    };
+
+    $("loginBtn").onclick = async () => {
+      const email = $("loginEmail").value.trim();
+      const password = $("loginPassword").value;
+
+      if (!email || !password) {
+        return showMessage("Enter your email and password.");
+      }
+
+      $("loginBtn").disabled = true;
+      showMessage("Logging in...", true);
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        showMessage("Login successful!", true);
+      } catch (error) {
+        showMessage(error.message);
+      } finally {
+        $("loginBtn").disabled = false;
+      }
+    };
+
+    $("logoutBtn").onclick = async () => {
+      try {
+        await signOut(auth);
+      } catch (error) {
+        showMessage(error.message);
+      }
+    };
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        $("auth").style.display = "none";
+        $("welcome").style.display = "block";
+
+        $("userEmail").textContent =
+          (user.displayName || "Member") + " — " + user.email;
+      } else {
+        $("auth").style.display = "block";
+        $("welcome").style.display = "none";
+      }
+    });
+  </script>
+
 </body>
 </html>
