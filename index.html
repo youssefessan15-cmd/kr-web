@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KR Web</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: white;
+    }
+    header {
+      padding: 22px;
+      background: #111a30;
+      border-bottom: 1px solid #263653;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 { margin: 0; color: #55c7ff; }
+    main {
+      max-width: 900px;
+      margin: 55px auto;
+      padding: 20px;
+      text-align: center;
+    }
+    .panel {
+      background: #141f38;
+      border: 1px solid #293b5d;
+      border-radius: 16px;
+      padding: 35px 20px;
+    }
+    button {
+      background: #168bd0;
+      color: white;
+      border: 0;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover { background: #0873b5; }
+    footer {
+      text-align: center;
+      color: #8998b5;
+      padding: 25px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>KR Web</h1>
+    <span>Welcome</span>
+  </header>
+
+  <main>
+    <div class="panel">
+      <h2>Welcome to KR Web</h2>
+      <p>Your community. Your conversations. Your space.</p>
+      <button onclick="alert('KR Web is starting!')">
+        Get Started
+      </button>
+    </div>
+  </main>
+
+  <footer>© 2026 KR Web. All rights reserved.</footer>
+</body>
+</html>
