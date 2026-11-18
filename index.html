@@ -4,106 +4,121 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KR Web - Community</title>
+  <meta name="theme-color" content="#080d1c">
+  <title>KR WEB</title>
 
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
       font-family: Arial, sans-serif;
     }
 
     body {
       min-height: 100vh;
-      background: #080d19;
+      background:
+        radial-gradient(circle at top, #172b55 0%, #080d1c 55%);
       color: white;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       padding: 20px;
     }
 
     .container {
       width: 100%;
-      max-width: 430px;
-      background: #111a2c;
-      border: 1px solid #263653;
-      border-radius: 18px;
-      padding: 35px;
-      box-shadow: 0 15px 50px #0008;
+      max-width: 440px;
+      background: rgba(17, 27, 49, 0.96);
+      border: 1px solid #263b62;
+      border-radius: 20px;
+      padding: 35px 28px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
     }
 
     .logo {
       text-align: center;
-      font-size: 35px;
+      font-size: 34px;
       font-weight: bold;
-      color: #42a5ff;
-      margin-bottom: 12px;
+      letter-spacing: 3px;
+      color: #61a5ff;
+      margin-bottom: 10px;
     }
 
     .subtitle {
       text-align: center;
-      color: #9aabc4;
+      color: #aab8d0;
       margin-bottom: 30px;
+      font-size: 14px;
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 22px;
+      font-size: 23px;
     }
 
     input {
       width: 100%;
       padding: 14px;
-      margin-bottom: 15px;
-      border: 1px solid #344664;
-      border-radius: 9px;
-      background: #0b1323;
+      margin-bottom: 14px;
+      border: 1px solid #344969;
+      border-radius: 10px;
+      background: #0b1427;
       color: white;
       outline: none;
       font-size: 15px;
     }
 
     input:focus {
-      border-color: #2999ff;
+      border-color: #61a5ff;
+    }
+
+    input::placeholder {
+      color: #8291aa;
     }
 
     button {
       width: 100%;
       padding: 14px;
       border: none;
-      border-radius: 9px;
-      background: #1689ed;
+      border-radius: 10px;
+      background: #2878e8;
       color: white;
-      font-weight: bold;
       font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
+      transition: 0.2s;
       margin-top: 5px;
     }
 
     button:hover {
-      background: #0873d0;
+      background: #4590ff;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .switch {
       text-align: center;
-      color: #a9b8ce;
       margin-top: 22px;
+      color: #aab8d0;
       font-size: 14px;
     }
 
     .switch span {
-      color: #42a5ff;
+      color: #61a5ff;
       cursor: pointer;
       font-weight: bold;
     }
 
     #message {
       text-align: center;
-      margin-top: 15px;
-      color: #ff8d8d;
+      margin-top: 18px;
       font-size: 14px;
+      line-height: 1.5;
       overflow-wrap: anywhere;
     }
 
@@ -112,67 +127,82 @@
       text-align: center;
     }
 
-    #welcome h2 {
-      color: #42a5ff;
-    }
-
-    #userEmail {
-      color: #b6c6dc;
-      margin: 20px 0;
+    #welcome p {
+      color: #b8c5dc;
+      margin: 18px 0;
+      line-height: 1.6;
       overflow-wrap: anywhere;
     }
 
-    .logout {
-      background: #e14b59;
-    }
-
-    footer {
+    .footer {
       text-align: center;
-      color: #65758d;
-      margin-top: 30px;
+      color: #7788a5;
       font-size: 12px;
+      margin-top: 28px;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
+  <main class="container">
 
     <div class="logo">KR WEB</div>
-    <p class="subtitle">Your community. Your conversations. Your space.</p>
 
-    <div id="auth">
+    <p class="subtitle">
+      Your community. Your conversations. Your space.
+    </p>
+
+    <section id="auth">
 
       <div id="loginForm">
         <h2>Welcome Back</h2>
 
-        <input id="loginEmail" type="email"
-          placeholder="Email Address" autocomplete="email">
+        <input
+          type="email"
+          id="loginEmail"
+          placeholder="Email Address"
+          autocomplete="email"
+        >
 
-        <input id="loginPassword" type="password"
-          placeholder="Password" autocomplete="current-password">
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="Password"
+          autocomplete="current-password"
+        >
 
         <button id="loginBtn">Login</button>
 
         <p class="switch">
           Don't have an account?
-          <span id="showSignup">Sign Up</span>
+          <span id="showSignup">Create Account</span>
         </p>
       </div>
 
-      <div id="signupForm" style="display:none">
+      <div id="signupForm" style="display:none;">
         <h2>Create Account</h2>
 
-        <input id="signupName" type="text"
-          placeholder="Display Name" autocomplete="name">
+        <input
+          type="text"
+          id="signupName"
+          placeholder="Your Name"
+          autocomplete="name"
+        >
 
-        <input id="signupEmail" type="email"
-          placeholder="Email Address" autocomplete="email">
+        <input
+          type="email"
+          id="signupEmail"
+          placeholder="Email Address"
+          autocomplete="email"
+        >
 
-        <input id="signupPassword" type="password"
-          placeholder="Password (at least 6 characters)"
-          autocomplete="new-password">
+        <input
+          type="password"
+          id="signupPassword"
+          placeholder="Password (minimum 6 characters)"
+          autocomplete="new-password"
+        >
 
         <button id="signupBtn">Create Account</button>
 
@@ -182,22 +212,26 @@
         </p>
       </div>
 
-      <p id="message" role="status"></p>
+    </section>
 
-    </div>
+    <section id="welcome">
+      <h2>Welcome to KR WEB!</h2>
 
-    <div id="welcome">
-      <h2>Welcome to KR Web!</h2>
-      <p>You are successfully logged in.</p>
       <p id="userEmail"></p>
-      <button id="logoutBtn" class="logout">Logout</button>
-    </div>
 
-    <footer>© 2026 KR Web. All rights reserved.</footer>
+      <button id="logoutBtn">Logout</button>
+    </section>
 
-  </div>
+    <p id="message" role="status" aria-live="polite"></p>
 
-  const firebaseConfig = {   apiKey: "AIzaSyBAJ9cMRt2-tCepCO8OqyX8PmMBoz8x9PU",   authDomain: "kr-app-5662d.firebaseapp.com",   projectId: "kr-app-5662d",   storageBucket: "kr-app-5662d.firebasestorage.app",   messagingSenderId: "795589994196",   appId: "1:795589994196:web:54de63927ec9043118fd41",   measurementId: "G-GMVGHLFYM2" };
+    <footer class="footer">
+      © 2026 KR WEB. All rights reserved.
+    </footer>
+
+  </main>
+
+  <script type="module">
+
     import { initializeApp } from
       "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 
@@ -211,20 +245,29 @@
     } from
       "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
-    // Replace these values with your Firebase project config
+
+    // Firebase Configuration
+
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyBAJ9cMRt2-tCepCO8OqyX8PmMBoz8x9PU",
+      authDomain: "kr-app-5662d.firebaseapp.com",
+      projectId: "kr-app-5662d",
+      storageBucket: "kr-app-5662d.firebasestorage.app",
+      messagingSenderId: "795589994196",
+      appId: "1:795589994196:web:54de63927ec9043118fd41",
+      measurementId: "G-GMVGHLFYM2"
     };
+
+
+    // Initialize Firebase
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
     const $ = (id) => document.getElementById(id);
+
+
+    // Messages
 
     function showMessage(message, success = false) {
       $("message").textContent = message;
@@ -232,11 +275,17 @@
         success ? "#55d99b" : "#ff8d8d";
     }
 
+
+    // Switch to Signup
+
     $("showSignup").onclick = () => {
       $("loginForm").style.display = "none";
       $("signupForm").style.display = "block";
       showMessage("");
     };
+
+
+    // Switch to Login
 
     $("showLogin").onclick = () => {
       $("signupForm").style.display = "none";
@@ -244,7 +293,11 @@
       showMessage("");
     };
 
+
+    // Create Account
+
     $("signupBtn").onclick = async () => {
+
       const name = $("signupName").value.trim();
       const email = $("signupEmail").value.trim();
       const password = $("signupPassword").value;
@@ -254,71 +307,124 @@
       }
 
       if (password.length < 6) {
-        return showMessage("Password must be at least 6 characters.");
+        return showMessage(
+          "Password must be at least 6 characters."
+        );
       }
 
       $("signupBtn").disabled = true;
       showMessage("Creating your account...", true);
 
       try {
+
         const result = await createUserWithEmailAndPassword(
-          auth, email, password
+          auth,
+          email,
+          password
         );
 
         await updateProfile(result.user, {
           displayName: name
         });
 
-        showMessage("Account created successfully!", true);
+        showMessage(
+          "Account created successfully!",
+          true
+        );
 
       } catch (error) {
+
+        console.error(error);
         showMessage(error.message);
+
       } finally {
+
         $("signupBtn").disabled = false;
+
       }
     };
 
+
+    // Login
+
     $("loginBtn").onclick = async () => {
+
       const email = $("loginEmail").value.trim();
       const password = $("loginPassword").value;
 
       if (!email || !password) {
-        return showMessage("Enter your email and password.");
+        return showMessage(
+          "Enter your email and password."
+        );
       }
 
       $("loginBtn").disabled = true;
       showMessage("Logging in...", true);
 
       try {
-        await signInWithEmailAndPassword(auth, email, password);
+
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
         showMessage("Login successful!", true);
+
       } catch (error) {
+
+        console.error(error);
         showMessage(error.message);
+
       } finally {
+
         $("loginBtn").disabled = false;
+
       }
     };
+
+
+    // Logout
 
     $("logoutBtn").onclick = async () => {
+
       try {
+
         await signOut(auth);
+        showMessage("You have logged out successfully.", true);
+
       } catch (error) {
+
+        console.error(error);
         showMessage(error.message);
+
       }
     };
 
+
+    // Check Login Status
+
     onAuthStateChanged(auth, (user) => {
+
       if (user) {
+
         $("auth").style.display = "none";
         $("welcome").style.display = "block";
 
         $("userEmail").textContent =
-          (user.displayName || "Member") + " — " + user.email;
+          (user.displayName || "Member") +
+          " — " +
+          user.email;
+
       } else {
+
         $("auth").style.display = "block";
         $("welcome").style.display = "none";
+
       }
+
     });
+
   </script>
 
 </body>
