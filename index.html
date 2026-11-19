@@ -188,6 +188,40 @@ button:disabled {
   font-weight: bold;
   font-size: 13px;
   margin-bottom: 6px;
+} .profile-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 50%;
+  background: #2878e8;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  border: 2px solid #61a5ff;
+  text-transform: uppercase;
+}
+
+.message-header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 8px;
+}
+
+.message-avatar {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  font-size: 13px;
 }
 
 .chat-text {
@@ -311,10 +345,13 @@ footer {
   <section id="appPanel">
 
     <div class="topbar">
-      <p id="userInfo">Welcome, Member</p>
-      <button class="logout" id="logoutBtn">Logout</button>
-    </div>
+  <div class="profile-row">
+    <div class="avatar" id="userAvatar">M</div>
+    <p id="userInfo">Welcome, Member</p>
+  </div>
 
+  <button class="logout" id="logoutBtn">Logout</button>
+</div>
     <h2>Community Chat</h2>
 
     <div class="rooms">
@@ -410,7 +447,10 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const $ = (id) => document.getElementById(id);
-
+function getInitial(name) {
+  const cleanName = (name || "Member").trim();
+  return cleanName.charAt(0).toUpperCase() || "M";
+}
 let currentUser = null;
 let activeRoom = "general";
 let unsubscribeMessages = null;
@@ -566,10 +606,18 @@ function displayMessages(snapshot) {
     const card = document.createElement("div");
     card.className = "chat-message";
 
-    const username = document.createElement("div");
-    username.className = "chat-username";
-    username.textContent = data.username || "Member";
+    const header = document.createElement("div");
+header.className = "message-header";
 
+const avatar = document.createElement("div");
+avatar.className = "avatar message-avatar";
+avatar.textContent = getInitial(data.username || "Member");
+
+const username = document.createElement("div");
+username.className = "chat-username";
+username.textContent = data.username || "Member";
+
+header.append(avatar, username);
     const text = document.createElement("div");
     text.className = "chat-text";
     text.textContent = data.text || "";
@@ -578,8 +626,7 @@ function displayMessages(snapshot) {
     time.className = "chat-time";
     time.textContent = formatTime(data.createdAt);
 
-    card.append(username, text, time);
-    area.appendChild(card);
+card.append(header, text, time);    area.appendChild(card);
   });
 
   area.scrollTop = area.scrollHeight;
@@ -702,9 +749,11 @@ onAuthStateChanged(auth, (user) => {
     $("auth").style.display = "none";
     $("appPanel").style.display = "block";
 
-    $("userInfo").textContent =
-      "Welcome, " + (user.displayName || "Member");
+   $("userInfo").textContent =
+  "Welcome, " + (user.displayName || "Member");
 
+$("userAvatar").textContent =
+  getInitial(user.displayName || "Member");
     openRoom(activeRoom);
 
   } else {
